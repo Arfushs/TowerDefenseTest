@@ -43,6 +43,10 @@ public class WaveSO : ScriptableObject
         _enemyCount--;
         return EnemyList[_index];
     }
-    
-    
+
+
+    public float GetTotalWaveTime()
+    {
+        return WaveInterval * EnemyCount;
+    }
 }

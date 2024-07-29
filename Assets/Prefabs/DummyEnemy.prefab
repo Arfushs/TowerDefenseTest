@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1327376950607351213}
   - component: {fileID: 1156236000146043964}
-  m_Layer: 0
+  - component: {fileID: 5926171581108217190}
+  - component: {fileID: 9194995831585301641}
+  m_Layer: 6
   m_Name: DummyEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,8 +47,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c6937a474c7a24ba3e1463ff900ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyConfig: {fileID: 0}
-  _moveSpeed: 5
+  _maxHP: 2
+  _weight: 1
+  _moveSpeed: 2
+--- !u!114 &5926171581108217190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3309945234294420442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8242f220093174e92efa33d5e43425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 8390993027216593232}
+  _upSprite: {fileID: 21300000, guid: 694422322bda027478307b7399c16a62, type: 3}
+  _downSprite: {fileID: 21300000, guid: 694422322bda027478307b7399c16a62, type: 3}
+  _rightSprite: {fileID: 21300000, guid: 411a233f426048c46a6c61d57f91066b, type: 3}
+--- !u!58 &9194995831585301641
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3309945234294420442}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3584291
 --- !u!1 &7875858914349699221
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1448332423919688897}
   - component: {fileID: 8390993027216593232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,8 +127,8 @@ Transform:
   m_GameObject: {fileID: 7875858914349699221}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.019374842}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalPosition: {x: -0.048, y: 0.087, z: -0.019374842}
+  m_LocalScale: {x: 0.23, y: 0.23, z: 0.23}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1327376950607351213}
@@ -120,8 +174,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.093725204, g: 0, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 411a233f426048c46a6c61d57f91066b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -1,18 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Base : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static event Action OnBaseDeath; 
+    
+    [SerializeField] private int MAX_HEALTH_POINT;
+    private int _currentHP;
+
+    private void Awake()
     {
-        
+        _currentHP = MAX_HEALTH_POINT;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.tag.Equals("Enemy"))
+        {
+            Enemy e = other.GetComponent<Enemy>();
+            _currentHP-=e.Weight();
+            e.DestroySelf();
+            Debug.Log("Current Base Health: " + _currentHP);
+        }
+            
     }
 }

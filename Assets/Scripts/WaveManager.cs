@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    public static event Action OnWaveStart;
-    public static event Action OnWaveComplete;
+    public static event Action<float> OnWaveStart;
+    public static event Action<float> OnWaveComplete;
+    public static event Action OnAllWavesCleared;
+    
     public float FirstInterval;
 
     [SerializeField] private List<Waypoint> _wayPointsList;
@@ -16,6 +18,7 @@ public class WaveManager : MonoBehaviour
     
     private WaveSO _currentWave;
     private int _waveIndex =0;
+    private bool _isGameFinished;
 
     private void OnEnable()
     {
@@ -27,9 +30,12 @@ public class WaveManager : MonoBehaviour
         SpawnNextWave();
     }
 
-    private void SpawnNextWave()
+    private void SpawnNextWave(float f=0)
     {
-        StartCoroutine(ManageWave());
+        if(!_isGameFinished)
+            StartCoroutine(ManageWave());
+        else
+            OnAllWavesCleared?.Invoke();
     }
 
     private IEnumerator ManageWave()
@@ -44,13 +50,14 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
-        OnWaveStart?.Invoke();
-        Debug.Log("Wave "+ _waveIndex + " Started !");
-        
         _currentWave = _waveList[_waveIndex];
         _currentWave.SetupConfig();
         int totalEnemyInWave = _currentWave.EnemyCount;
         int enemyLeft = totalEnemyInWave;
+        
+        OnWaveStart?.Invoke(_currentWave.GetTotalWaveTime());
+        Debug.Log("Wave "+ _waveIndex + " Started !");
+        
         while (enemyLeft >0)
         {
             Enemy enemy = Instantiate(_currentWave.GetNextEnemy(),_enemyContainer);
@@ -63,6 +70,12 @@ public class WaveManager : MonoBehaviour
         
         Debug.Log("Wave "+ _waveIndex + " Finished !");
         _waveIndex++;
-        OnWaveComplete?.Invoke();
+        
+        if (_waveIndex == _waveList.Count)
+            _isGameFinished = true;
+        
+        OnWaveComplete?.Invoke(_currentWave.IntervalAfterWave);
     }
+
+    
 }
